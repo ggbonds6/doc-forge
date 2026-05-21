@@ -1,0 +1,31 @@
+server:
+  port: ${DOCFORGE_SERVER_PORT:8080}
+
+spring:
+  application:
+    name: govdoc-backend
+  datasource:
+    url: ${DOCFORGE_DATASOURCE_URL:jdbc:h2:mem:docforge;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${DOCFORGE_DATASOURCE_USERNAME:sa}
+    password: ${DOCFORGE_DATASOURCE_PASSWORD:}
+    driver-class-name: ${DOCFORGE_DATASOURCE_DRIVER:org.h2.Driver}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: ${DOCFORGE_HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+docforge:
+  admin:
+    username: ${DOCFORGE_ADMIN_USERNAME:admin}
+    password: ${DOCFORGE_ADMIN_PASSWORD:admin123}
+    token: ${DOCFORGE_ADMIN_TOKEN:docforge-dev-token}
+  storage:
+    root: ${DOCFORGE_STORAGE_ROOT:./storage}
